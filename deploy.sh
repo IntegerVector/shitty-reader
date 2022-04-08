@@ -23,6 +23,6 @@ git branch -M main
 git add -A
 git commit -m "'deploy v$2'"
 git tag "$2"
-git push -f git@github.com:IntegerVector/flash-cards.git main:$1
-git push git@github.com:IntegerVector/flash-cards.git --tags
+git push -f git@github.com:IntegerVector/shitty-reader.git main:$1
+git push git@github.com:IntegerVector/shitty-reader.git --tags
 cd -
