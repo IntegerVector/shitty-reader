@@ -1,5 +1,9 @@
 # shitty-reader
 
+This is a shitty reader for reading shitty manga from [MangaPill](mangapill.com) web page.
+
+To use go to https://integervector.github.io/shitty-reader/
+
 ## Project setup
 ```
 npm install
@@ -19,6 +23,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
