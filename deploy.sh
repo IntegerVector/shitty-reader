@@ -15,7 +15,6 @@ echo "Deploying to GitHub pages, to branch $1"
 echo "Build version $2"
 
 set -e
-npm run test
 npm run build
 
 cd dist
