@@ -1,15 +1,18 @@
 <template>
   <div class="search-container">
     <div class="search-box">
-      <!-- For future -->
-      <!-- <div class="search-source">
-        &nbsp;
-      </div> -->
+      <div class="search-type">
+        <select v-model="type">
+          <option value="png">png</option>
+          <option value="jpeg">jpeg</option>
+          <option value="jpg">jpg</option>
+        </select>
+      </div>
       <div class="search-text">
         <input type="search" v-model="text" />
       </div>
       <div class="search-confirm">
-        <button @click="search()">👀</button>
+        <button @click="search()">Go</button>
       </div>
     </div>
   </div>
@@ -27,12 +30,13 @@ export default {
     return {
       text: "",
       source: "MANGA_PILL",
+      type: "jpeg",
     };
   },
   methods: {
     async search() {
       const strategy = getStrategy(this.source);
-      const data = await strategy.loadPages(this.text);
+      const data = await strategy.loadPages(`${this.text}|type:${this.type}`);
       this.$emit("onSearch", data);
     },
   },
@@ -70,5 +74,7 @@ export default {
 
 .search-confirm {
   flex-grow: 0;
+  display: grid;
+  place-items: center;
 }
 </style>

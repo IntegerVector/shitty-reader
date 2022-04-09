@@ -20,7 +20,7 @@ body,
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #19242e;
+  color: #000000;
 }
 
 .page {
@@ -35,6 +35,8 @@ body,
 button,
 input[type="text"],
 input[type="search"],
+select,
+option,
 .text-input {
   font-size: 1.5rem;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -59,5 +61,11 @@ input[type="search"],
   width: 100%;
   max-width: 100%;
   height: 2rem;
+}
+
+select,
+option {
+  display: grid;
+  place-items: center;
 }
 </style>

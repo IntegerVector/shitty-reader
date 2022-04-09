@@ -1,4 +1,4 @@
-import { MangaPillStrategy } from "./manga-pill.strategy";
+import { MangaPillStrategy } from "@/strategies/manga-pill.strategy";
 
 export function getStrategy(source) {
   switch (source) {
