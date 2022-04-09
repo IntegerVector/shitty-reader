@@ -12,7 +12,7 @@
         <input type="search" v-model="text" />
       </div>
       <div class="search-confirm">
-        <button @click="search()">Go</button>
+        <button @click="search()">⬇️</button>
       </div>
     </div>
   </div>
