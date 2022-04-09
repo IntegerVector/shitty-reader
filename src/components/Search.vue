@@ -56,7 +56,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #ffffff;
 }
 
 .search-source,
@@ -71,6 +71,17 @@ export default {
 
 .search-text {
   flex-grow: 1;
+}
+
+input,
+select,
+option {
+  color: #ffffff;
+}
+
+option {
+  cursor: pointer;
+  background-color: #000000;
 }
 
 .search-confirm {

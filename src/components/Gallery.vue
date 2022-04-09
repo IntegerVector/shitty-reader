@@ -75,18 +75,18 @@ export default {
 
 .up-button {
   position: fixed;
-  right: 2rem;
-  bottom: 1rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
   display: none;
   background-color: #ffffff;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
 .space-for-up-button {
   width: 100%;
-  height: 5rem;
+  height: 6rem;
 }
 </style>

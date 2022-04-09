@@ -13,6 +13,7 @@ body,
   padding: 0;
   height: 100%;
   width: 100%;
+  background-color: #000000;
 }
 
 #app {
@@ -20,16 +21,12 @@ body,
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #000000;
+  color: #ffffff;
 }
 
 .page {
   width: 100%;
   height: 100%;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow-y: auto; */
 }
 
 button,
@@ -57,7 +54,6 @@ input[type="search"],
 .text-input {
   display: block;
   cursor: text;
-  border-radius: 3rem;
   width: 100%;
   max-width: 100%;
   height: 2rem;
