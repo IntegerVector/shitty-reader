@@ -10,10 +10,6 @@
         @load="loaded(url)"
       />
     </dir>
-    <button ref="upButton" class="up-button" @click="goUp()">🔝</button>
-    <div class="space-for-up-button">
-      <!-- This is just an empty space to don't allow "Up" button to cover last page! -->
-    </div>
   </div>
 </template>
 
@@ -26,27 +22,10 @@ export default {
       default: new Array(),
     },
   },
-  mounted() {
-    const btn = this.$refs.upButton;
-    window.onscroll = () => {
-      if (
-        document.body.scrollTop > 250 ||
-        document.documentElement.scrollTop > 250
-      ) {
-        btn.style.display = "block";
-      } else {
-        btn.style.display = "none";
-      }
-    };
-  },
   methods: {
     loaded(url) {
       const image = document.getElementById(url);
       image.style.display = "block";
-    },
-    goUp() {
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     },
   },
 };
@@ -71,22 +50,5 @@ export default {
 
 .gallery-item {
   display: none;
-}
-
-.up-button {
-  position: fixed;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  display: none;
-  background-color: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  border-radius: 50%;
-  width: 3.5rem;
-  height: 3.5rem;
-}
-
-.space-for-up-button {
-  width: 100%;
-  height: 6rem;
 }
 </style>
