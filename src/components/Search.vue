@@ -9,7 +9,11 @@
         </select>
       </div>
       <div class="search-text">
-        <input type="search" v-model="text" />
+        <input
+          placeholder="Type manga URL here ..."
+          type="search"
+          v-model="text"
+        />
       </div>
       <div class="search-confirm">
         <button @click="search()">⬇️</button>
