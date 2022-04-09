@@ -37,7 +37,8 @@ export default {
     async search() {
       const strategy = getStrategy(this.source);
       const data = await strategy.loadPages(`${this.text}|type:${this.type}`);
-      this.$emit("onSearch", data);
+      this.text = data.text;
+      this.$emit("onSearch", data.urls);
     },
   },
 };

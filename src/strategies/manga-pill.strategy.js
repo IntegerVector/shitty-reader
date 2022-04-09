@@ -2,27 +2,41 @@ export class MangaPillStrategy {
   loadPages(searchString) {
     return new Promise((resolve, reject) => {
       const imageType = this._getImageType(searchString);
-      const fullCode = searchString.match(/\d+\-\d+/)[0];
+      const fullCode = this._getFullCode(searchString);
       const fragments = fullCode.match(/\d+/g);
-      const bookId = fragments[0];
-      const chapterId = fragments[1];
+      const bookId = fragments && fragments.length ? fragments[0] : "";
+      const chapterId = fragments && fragments.length ? fragments[1] : "";
       const urlsList = new Array(200);
       urlsList.fill("");
 
       if (!bookId || !chapterId) {
-        reject([]);
+        reject({ text: fullCode, urls: [] });
         return;
       }
 
-      resolve(
-        urlsList.map((url, index) => {
+      resolve({
+        text: fullCode,
+        urls: urlsList.map((url, index) => {
           if (!bookId || !chapterId || !imageType) {
             return "";
           }
           return this._getUrl(bookId, chapterId, index + 1, imageType);
-        })
-      );
+        }),
+      });
     });
+  }
+
+  _getFullCode(searchString) {
+    const fullCodeMatch = searchString.match(/\d+\D\d+/);
+    if (fullCodeMatch && fullCodeMatch.length) {
+      return fullCodeMatch[0];
+    } else {
+      const bookIdMatch = searchString.match(/\d+/);
+
+      return bookIdMatch && bookIdMatch.length
+        ? `${bookIdMatch[0]}-10001000`
+        : "";
+    }
   }
 
   _getUrl(bookId, chapterId, number, imageType) {
