@@ -1,6 +1,8 @@
 <template>
   <div class="gallery-container">
-    <img class="gallery-item" v-for="url in urlsList" :key="url" :src="url" />
+    <dir class="gallery-item-container" v-for="url in urlsList" :key="url">
+      <img class="gallery-item" v-if="url" :src="url" />
+    </dir>
   </div>
 </template>
 
@@ -24,7 +26,8 @@ export default {
   background-color: transparent;
 }
 
-.gallery-item {
+.gallery-item,
+.gallery-item-container {
   width: 100%;
   height: auto;
   background-color: transparent;

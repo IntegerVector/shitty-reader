@@ -16,6 +16,9 @@ export class MangaPillStrategy {
 
       resolve(
         urlsList.map((url, index) => {
+          if (!bookId || !chapterId || !imageType) {
+            return "";
+          }
           return this._getUrl(bookId, chapterId, index + 1, imageType);
         })
       );
