@@ -1,13 +1,6 @@
 <template>
   <div class="search-container">
     <div class="search-box">
-      <div class="search-type">
-        <select v-model="type">
-          <option value="png">png</option>
-          <option value="jpeg">jpeg</option>
-          <option value="jpg">jpg</option>
-        </select>
-      </div>
       <div class="search-text">
         <input
           placeholder="Type manga URL here ..."
@@ -27,14 +20,32 @@ import { getStrategy } from "@/services/get-strategy-by-source";
 
 export default {
   name: "Search",
+  props: {
+    imageType: {
+      type: String,
+      default: new String(""),
+    },
+  },
   emits: {
     onSearch: Array,
+  },
+  watch: {
+    imageType: {
+      immediate: true,
+      deep: false,
+      handler(newValue, oldValue) {
+        if (newValue !== oldValue) {
+          this.type = newValue;
+          this.search();
+        }
+      },
+    },
   },
   data() {
     return {
       text: "",
       source: "MANGA_PILL",
-      type: "jpeg",
+      type: this.imageType,
     };
   },
   methods: {
@@ -63,34 +74,19 @@ export default {
   border-bottom: 1px solid #ffffff;
 }
 
-.search-source,
 .search-confirm {
   height: 2.5rem;
   width: 2.5rem;
-}
-
-.search-source {
   flex-grow: 0;
+  display: grid;
+  place-items: center;
 }
 
 .search-text {
   flex-grow: 1;
 }
 
-input,
-select,
-option {
+input {
   color: #ffffff;
-}
-
-option {
-  cursor: pointer;
-  background-color: #000000;
-}
-
-.search-confirm {
-  flex-grow: 0;
-  display: grid;
-  place-items: center;
 }
 </style>

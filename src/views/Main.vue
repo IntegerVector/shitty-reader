@@ -1,7 +1,11 @@
 <template>
   <div class="page">
-    <Search ref="search" @onSearch="loadImages($event)" />
-    <Gallery :urlsList="urlsList" />
+    <Search
+      ref="search"
+      :imageType="imageType"
+      @onSearch="loadImages($event)"
+    />
+    <Gallery :urlsList="urlsList" @noData="nextImageType()" />
     <div class="tool-bar">
       <button ref="upButton" class="tool-bar-button up-button" @click="goUp()">
         <span class="top-arrow">&nbsp;</span>
@@ -33,6 +37,8 @@ export default {
   },
   data() {
     return {
+      imageTypesList: ["jpeg", "jpg", "png"],
+      imageType: "jpeg",
       urlsList: [],
       strategy: getStrategy("MANGA_PILL"),
     };
@@ -51,6 +57,10 @@ export default {
     };
   },
   methods: {
+    nextImageType() {
+      const index = this.imageTypesList.indexOf(this.imageType);
+      this.imageType = this.imageTypesList[index + 1] || this.imageTypesList[0];
+    },
     updateSearchString(string) {
       this.$refs.search.text = string;
       this.$refs.search.search();
@@ -110,32 +120,5 @@ export default {
 .space-for-up-button {
   width: 100%;
   height: 6rem;
-}
-
-.left-arrow {
-  border-left: 2px solid #000000;
-  border-bottom: 2px solid #000000;
-  transform: rotate(45deg);
-  width: 1rem;
-  height: 1rem;
-  margin-left: 0.5rem;
-}
-
-.right-arrow {
-  border-right: 2px solid #000000;
-  border-top: 2px solid #000000;
-  transform: rotate(45deg);
-  width: 1rem;
-  height: 1rem;
-  margin-right: 0.5rem;
-}
-
-.top-arrow {
-  border-left: 2px solid #000000;
-  border-top: 2px solid #000000;
-  transform: rotate(45deg);
-  width: 1rem;
-  height: 1rem;
-  margin-top: 0.5rem;
 }
 </style>

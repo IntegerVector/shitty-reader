@@ -6,7 +6,7 @@ export class MangaPillStrategy {
       const fragments = fullCode.match(/\d+/g);
       const bookId = fragments && fragments.length ? fragments[0] : "";
       const chapterId = fragments && fragments.length ? fragments[1] : "";
-      const urlsList = new Array(200);
+      const urlsList = new Array(250);
       urlsList.fill("");
 
       if (!bookId || !chapterId) {

@@ -64,4 +64,38 @@ option {
   display: grid;
   place-items: center;
 }
+
+.left-arrow,
+.right-arrow,
+.top-arrow,
+.bottom-arrow {
+  transform: rotate(45deg);
+  width: 1rem;
+  height: 1rem;
+  display: block;
+}
+
+.left-arrow {
+  border-left: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  margin-left: 0.5rem;
+}
+
+.right-arrow {
+  border-right: 2px solid #000000;
+  border-top: 2px solid #000000;
+  margin-right: 0.5rem;
+}
+
+.top-arrow {
+  border-left: 2px solid #000000;
+  border-top: 2px solid #000000;
+  margin-top: 0.5rem;
+}
+
+.bottom-arrow {
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  margin-bottom: 0.5rem;
+}
 </style>
