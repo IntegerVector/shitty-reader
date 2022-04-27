@@ -1,17 +1,19 @@
 <template>
   <div class="search-container">
-    <div class="search-box">
+    <form class="search-box" @submit="$event.preventDefault() && search()">
       <div class="search-text">
         <input
           placeholder="Type manga URL here ..."
           type="search"
           v-model="text"
+          @submit="search()"
         />
       </div>
       <div class="search-confirm">
         <button @click="search()">⬇️</button>
+        <input type="submit" />
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -23,7 +25,7 @@ export default {
   props: {
     imageType: {
       type: String,
-      default: new String(""),
+      default: new String("jpeg"),
     },
   },
   emits: {
@@ -71,6 +73,9 @@ export default {
   align-items: center;
   border-bottom: 1px solid #ffffff;
 }
+.search-text {
+  flex-grow: 1;
+}
 
 .search-confirm {
   height: 2.5rem;
@@ -80,11 +85,14 @@ export default {
   place-items: center;
 }
 
-.search-text {
-  flex-grow: 1;
-}
-
 input {
   color: #ffffff;
+}
+
+input[type="submit"] {
+  display: none;
+  visibility: hidden;
+  height: 0;
+  width: 0;
 }
 </style>
