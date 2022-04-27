@@ -19,6 +19,7 @@
 
 <script>
 import { getStrategy } from "@/services/get-strategy-by-source";
+import { history } from "@/services/history";
 
 export default {
   name: "Search",
@@ -48,12 +49,23 @@ export default {
       type: this.imageType,
     };
   },
+  mounted() {
+    this.text = this.getHistory()[0] || "";
+
+    if (this.text) {
+      this.search();
+    }
+  },
   methods: {
     async search() {
       const strategy = getStrategy(this.source);
       const data = await strategy.loadPages(`${this.text}|type:${this.type}`);
       this.text = data.text;
+      history.push(data.text);
       this.$emit("onSearch", data.urls);
+    },
+    getHistory() {
+      return history.get() || [];
     },
   },
 };
