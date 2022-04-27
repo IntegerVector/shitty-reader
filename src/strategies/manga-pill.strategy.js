@@ -89,13 +89,12 @@ export class MangaPillStrategy {
 
   _getPreviousChapter(bookAndChapter) {
     const asString = "" + bookAndChapter[1];
-    const withoutZeros = asString.slice(0, -3);
-    if (withoutZeros.charAt(withoutZeros.length - 1) === "0") {
+    if (asString === "10000000") {
       return `${bookAndChapter[0]}-${bookAndChapter[1]}`;
-    } else {
-      const asNumber = parseInt(withoutZeros);
-      const newChapterNumber = asNumber - 1;
-      return `${bookAndChapter[0]}-${newChapterNumber}000`;
     }
+    const withoutZeros = asString.slice(0, -3);
+    const asNumber = parseInt(withoutZeros);
+    const newChapterNumber = asNumber - 1;
+    return `${bookAndChapter[0]}-${newChapterNumber}000`;
   }
 }
