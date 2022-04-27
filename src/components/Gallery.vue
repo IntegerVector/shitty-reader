@@ -23,12 +23,23 @@ export default {
       default: new Array(),
     },
   },
+  watch: {
+    urlsList: {
+      deep: true,
+      // eslint-disable-next-line no-unused-vars
+      handler(newValue, oldValue) {
+        this.errorsCount = 0;
+        this.loadedCount = 0;
+      },
+    },
+  },
   emits: {
     noData: null,
   },
   data() {
     return {
       errorsCount: 0,
+      loadedCount: 0,
     };
   },
   methods: {
@@ -41,7 +52,7 @@ export default {
         ++this.errorsCount;
       }
 
-      if (this.errorsCount >= this.urlsList.length) {
+      if (this.errorsCount >= this.urlsList.length && this.loadedCount === 0) {
         this.errorsCount = 0;
         this.$emit("noData");
       }

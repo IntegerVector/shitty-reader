@@ -31,8 +31,6 @@ export default {
   },
   watch: {
     imageType: {
-      immediate: true,
-      deep: false,
       handler(newValue, oldValue) {
         if (newValue !== oldValue) {
           this.type = newValue;
