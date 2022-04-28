@@ -26,6 +26,11 @@
   -webkit-font-smoothing: antialiased;
 }
 
+.icon--clickable {
+  user-select: none;
+  cursor: pointer;
+}
+
 :root {
   font-size: 16px;
 }

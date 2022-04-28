@@ -32,6 +32,10 @@ export default {
       type: String,
       default: new String("jpeg"),
     },
+    searchString: {
+      type: String,
+      default: new String(""),
+    },
   },
   emits: {
     onSearch: Array,
@@ -41,6 +45,14 @@ export default {
       handler(newValue, oldValue) {
         if (newValue !== oldValue) {
           this.type = newValue;
+          this.search();
+        }
+      },
+    },
+    searchString: {
+      handler(newValue, oldValue) {
+        if (newValue !== oldValue) {
+          this.text = this.searchString;
           this.search();
         }
       },

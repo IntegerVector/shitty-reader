@@ -3,18 +3,27 @@
     <Search
       ref="search"
       :imageType="imageType"
+      :searchString="searchString"
       @onSearch="loadImages($event)"
     />
     <Gallery :urlsList="urlsList" @noData="nextImageType()" />
+    <HistoryAndFavoritesModal
+      v-if="isModalOpened"
+      @onClose="closeModal()"
+      @onSelect="itemFromModalSelected($event)"
+    />
     <div class="tool-bar">
+      <button class="tool-bar-button" @click="openModal()">
+        <span class="material-icons text--dark"> list </span>
+      </button>
       <button ref="upButton" class="tool-bar-button up-button" @click="goUp()">
-        <span class="material-icons"> expand_less </span>
+        <span class="material-icons text--dark"> expand_less </span>
       </button>
       <button class="tool-bar-button" v-if="urlsList.length" @click="goBack()">
-        <span class="material-icons"> navigate_before </span>
+        <span class="material-icons text--dark"> navigate_before </span>
       </button>
       <button class="tool-bar-button" v-if="urlsList.length" @click="goNext()">
-        <span class="material-icons"> navigate_next </span>
+        <span class="material-icons text--dark"> navigate_next </span>
       </button>
     </div>
     <div class="space-for-up-button">
@@ -26,6 +35,7 @@
 <script>
 import Search from "@/components/Search.vue";
 import Gallery from "@/components/Gallery.vue";
+import HistoryAndFavoritesModal from "@/components/history-and-favorites/HistoryAndFavoritesModal.vue";
 
 import { getStrategy } from "@/services/get-strategy-by-source";
 
@@ -34,13 +44,16 @@ export default {
   components: {
     Search,
     Gallery,
+    HistoryAndFavoritesModal,
   },
   data() {
     return {
       imageTypesList: ["jpeg", "jpg", "png"],
       imageType: "jpeg",
+      searchString: "",
       urlsList: [],
       strategy: getStrategy("MANGA_PILL"),
+      isModalOpened: false,
     };
   },
   mounted() {
@@ -83,6 +96,18 @@ export default {
         this.urlsList
       );
       this.updateSearchString(newBookAndChapter);
+    },
+    openModal() {
+      this.isModalOpened = true;
+    },
+    closeModal() {
+      this.isModalOpened = false;
+    },
+    itemFromModalSelected($event) {
+      if ($event) {
+        this.closeModal();
+        this.searchString = $event;
+      }
     },
   },
 };
