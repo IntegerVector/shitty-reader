@@ -8,13 +8,13 @@
     <Gallery :urlsList="urlsList" @noData="nextImageType()" />
     <div class="tool-bar">
       <button ref="upButton" class="tool-bar-button up-button" @click="goUp()">
-        <span class="top-arrow">&nbsp;</span>
+        <span class="material-icons"> expand_less </span>
       </button>
       <button class="tool-bar-button" v-if="urlsList.length" @click="goBack()">
-        <span class="left-arrow">&nbsp;</span>
+        <span class="material-icons"> navigate_before </span>
       </button>
       <button class="tool-bar-button" v-if="urlsList.length" @click="goNext()">
-        <span class="right-arrow">&nbsp;</span>
+        <span class="material-icons"> navigate_next </span>
       </button>
     </div>
     <div class="space-for-up-button">

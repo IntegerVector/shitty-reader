@@ -10,7 +10,9 @@
         />
       </div>
       <div class="search-confirm">
-        <button @click="search()">⬇️</button>
+        <button @click="search()">
+          <span class="material-icons text--light"> download </span>
+        </button>
         <input type="submit" />
       </div>
     </form>
@@ -58,6 +60,10 @@ export default {
   },
   methods: {
     async search() {
+      if (!this.text) {
+        this.$emit("onSearch", []);
+      }
+
       const strategy = getStrategy(this.source);
       const data = await strategy.loadPages(`${this.text}|type:${this.type}`);
       this.text = data.text;
