@@ -6,12 +6,14 @@
           placeholder="Type manga URL here ..."
           type="search"
           v-model="text"
-          @submit="search()"
         />
       </div>
-      <div class="search-confirm">
+      <div class="search-commands">
         <button @click="search()">
           <span class="material-icons text--light"> download </span>
+        </button>
+        <button @click="clear()">
+          <span class="material-icons text--light"> clear </span>
         </button>
         <input type="submit" />
       </div>
@@ -60,7 +62,7 @@ export default {
   },
   methods: {
     async search() {
-      if (!this.text) {
+      if (this.text === "") {
         this.$emit("onSearch", []);
       }
 
@@ -69,6 +71,10 @@ export default {
       this.text = data.text;
       history.push(data.text);
       this.$emit("onSearch", data.urls);
+    },
+    clear() {
+      this.text = "";
+      this.$emit("onSearch", []);
     },
     getHistory() {
       return history.get() || [];
@@ -95,12 +101,14 @@ export default {
   flex-grow: 1;
 }
 
-.search-confirm {
-  height: 2.5rem;
-  width: 2.5rem;
+.search-commands {
   flex-grow: 0;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.25rem;
+  height: 2.5rem;
 }
 
 input {
@@ -108,7 +116,6 @@ input {
 }
 
 input[type="submit"] {
-  display: none;
   visibility: hidden;
   height: 0;
   width: 0;

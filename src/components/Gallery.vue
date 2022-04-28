@@ -1,5 +1,5 @@
 <template>
-  <div class="gallery-container">
+  <div v-if="urlsList.length > 0" class="gallery-container">
     <dir class="gallery-item-container" v-for="url in urlsList" :key="url">
       <img
         class="gallery-item"
