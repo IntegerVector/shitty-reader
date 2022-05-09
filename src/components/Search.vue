@@ -28,10 +28,6 @@ import { history } from "@/services/history";
 export default {
   name: "Search",
   props: {
-    imageType: {
-      type: String,
-      default: new String("jpeg"),
-    },
     searchString: {
       type: String,
       default: new String(""),
@@ -41,14 +37,6 @@ export default {
     onSearch: Array,
   },
   watch: {
-    imageType: {
-      handler(newValue, oldValue) {
-        if (newValue !== oldValue) {
-          this.type = newValue;
-          this.search();
-        }
-      },
-    },
     searchString: {
       handler(newValue, oldValue) {
         if (newValue !== oldValue) {
@@ -62,11 +50,10 @@ export default {
     return {
       text: "",
       source: "MANGA_PILL",
-      type: this.imageType,
     };
   },
   mounted() {
-    this.text = this.getHistory()[0] || "";
+    this.text = this.getHistory().pop() || "";
 
     if (this.text) {
       this.search();
@@ -79,7 +66,7 @@ export default {
       }
 
       const strategy = getStrategy(this.source);
-      const data = await strategy.loadPages(`${this.text}|type:${this.type}`);
+      const data = await strategy.loadPages(`${this.text}`);
       this.text = data.text;
       history.push(data.text);
       this.$emit("onSearch", data.urls);

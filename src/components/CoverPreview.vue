@@ -29,8 +29,8 @@ export default {
       urls: [],
     };
   },
-  mounted() {
-    this.urls = this.strategy.getCovers(this.searchString);
+  async mounted() {
+    this.urls = await this.strategy.getCovers(this.searchString);
   },
   methods: {
     loaded(url) {

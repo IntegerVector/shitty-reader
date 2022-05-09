@@ -8,7 +8,6 @@
         :id="url"
         :src="url"
         @load="loaded(url)"
-        @error="onError($event)"
       />
     </dir>
   </div>
@@ -33,9 +32,6 @@ export default {
       },
     },
   },
-  emits: {
-    noData: null,
-  },
   data() {
     return {
       errorsCount: 0,
@@ -46,16 +42,6 @@ export default {
     loaded(url) {
       const image = document.getElementById(url);
       image.style.display = "block";
-    },
-    onError($event) {
-      if ($event.type === "error") {
-        ++this.errorsCount;
-      }
-
-      if (this.errorsCount >= this.urlsList.length && this.loadedCount === 0) {
-        this.errorsCount = 0;
-        this.$emit("noData");
-      }
     },
   },
 };

@@ -2,11 +2,10 @@
   <div class="page">
     <Search
       ref="search"
-      :imageType="imageType"
       :searchString="searchString"
       @onSearch="loadImages($event)"
     />
-    <Gallery :urlsList="urlsList" @noData="nextImageType()" />
+    <Gallery :urlsList="urlsList" />
     <HistoryAndFavoritesModal
       v-if="isModalOpened"
       @onClose="closeModal()"
@@ -48,8 +47,6 @@ export default {
   },
   data() {
     return {
-      imageTypesList: ["jpeg", "jpg", "png"],
-      imageType: "jpeg",
       searchString: "",
       urlsList: [],
       strategy: getStrategy("MANGA_PILL"),
@@ -70,10 +67,6 @@ export default {
     };
   },
   methods: {
-    nextImageType() {
-      const index = this.imageTypesList.indexOf(this.imageType);
-      this.imageType = this.imageTypesList[index + 1] || this.imageTypesList[0];
-    },
     updateSearchString(string) {
       this.$refs.search.text = string;
       this.$refs.search.search();

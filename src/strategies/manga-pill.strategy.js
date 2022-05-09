@@ -1,13 +1,21 @@
 export class MangaPillStrategy {
   loadPages(searchString) {
     return new Promise((resolve, reject) => {
-      const imageType = this._getImageType(searchString);
       const fullCode = this._getFullCode(searchString);
       const fragments = fullCode.match(/\d+/g);
       const bookId = fragments && fragments.length ? fragments[0] : "";
       const chapterId = fragments && fragments.length ? fragments[1] : "";
       const urlsList = new Array(250);
       urlsList.fill("");
+
+      const pagesByType = ["jpeg", "jpg", "png"].map((type) => {
+        return urlsList.map((url, index) => {
+          if (!bookId || !chapterId) {
+            return "";
+          }
+          return this._getUrl(bookId, chapterId, index + 1, type);
+        });
+      });
 
       if (!bookId || !chapterId) {
         reject({ text: fullCode, urls: [] });
@@ -16,12 +24,7 @@ export class MangaPillStrategy {
 
       resolve({
         text: fullCode,
-        urls: urlsList.map((url, index) => {
-          if (!bookId || !chapterId || !imageType) {
-            return "";
-          }
-          return this._getUrl(bookId, chapterId, index + 1, imageType);
-        }),
+        urls: [...pagesByType[0], ...pagesByType[1], ...pagesByType[2]],
       });
     });
   }
@@ -53,10 +56,13 @@ export class MangaPillStrategy {
   }
 
   getCovers(searchString) {
-    const bookId = searchString.match(/\d+/i)[0];
+    return new Promise((resolve) => {
+      const bookId = searchString.match(/\d+/i)[0];
+      const covers = ["jpeg", "jpg", "png"].map((type) => {
+        return this._getCoverUrl(bookId, type);
+      });
 
-    return ["jpeg", "jpg", "png"].map((type) => {
-      return this._getCoverUrl(bookId, type);
+      resolve(covers);
     });
   }
 
@@ -79,16 +85,6 @@ export class MangaPillStrategy {
 
   _getCoverUrl(bookId, imageType) {
     return `//cdn.readdetectiveconan.com/file/mangapill/i/${bookId}.${imageType}`;
-  }
-
-  _getImageType(searchString) {
-    if (/type\:png/.test(searchString)) {
-      return "png";
-    } else if (/type\:jpeg/.test(searchString)) {
-      return "jpeg";
-    } else if (/type\:jpg/.test(searchString)) {
-      return "jpg";
-    }
   }
 
   _getNextChapter(bookAndChapter) {
