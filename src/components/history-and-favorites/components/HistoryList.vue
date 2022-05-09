@@ -62,7 +62,8 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1.5rem;
   cursor: pointer;
   border-bottom: 1px solid #ffffff;
 }

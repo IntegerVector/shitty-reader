@@ -49,7 +49,7 @@ export default {
 }
 
 .tab-header {
-  padding: 1rem;
+  padding-bottom: 0.5rem;
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -62,7 +62,7 @@ export default {
 }
 
 .tab-label {
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   display: grid;
   place-items: center;
 }

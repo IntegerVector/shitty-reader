@@ -16,6 +16,10 @@
           v-if="selectedTabId === 'h'"
           @onSelect="$emit('onSelect', $event)"
         />
+        <FavoritesList
+          v-if="selectedTabId === 'f'"
+          @onSelect="$emit('onSelect', $event)"
+        />
       </div>
     </div>
   </div>
@@ -23,12 +27,14 @@
 
 <script>
 import HistoryList from "./components/HistoryList.vue";
+import FavoritesList from "./components/FavoritesList.vue";
 import TabHeader from "@/components/TabHeader.vue";
 
 export default {
   name: "HistoryAndFavoritesModal",
   components: {
     HistoryList,
+    FavoritesList,
     TabHeader,
   },
   emits: {
