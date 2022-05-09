@@ -1,7 +1,7 @@
 <template>
   <ul class="list-container">
     <li v-for="item in itemsList" :key="item">
-      <CoverPreview :searchString="item" />
+      <CoverPreview :searchString="item" @click="$emit('onSelect', item)" />
       <span @click="$emit('onSelect', item)">
         {{ item }}
       </span>

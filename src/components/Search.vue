@@ -140,8 +140,4 @@ input[type="submit"] {
   height: 0;
   width: 0;
 }
-
-.icon--smaller {
-  font-size: 1.75rem;
-}
 </style>

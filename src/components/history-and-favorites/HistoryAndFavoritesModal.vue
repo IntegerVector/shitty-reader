@@ -7,7 +7,15 @@
         </span>
       </div>
       <div class="modal-content">
-        <HistoryList @onSelect="$emit('onSelect', $event)" />
+        <TabHeader
+          class="modal-tabs"
+          :tabs="tabs"
+          @onSelect="selectedTabId = $event.id"
+        />
+        <HistoryList
+          v-if="selectedTabId === 'h'"
+          @onSelect="$emit('onSelect', $event)"
+        />
       </div>
     </div>
   </div>
@@ -15,15 +23,34 @@
 
 <script>
 import HistoryList from "./components/HistoryList.vue";
+import TabHeader from "@/components/TabHeader.vue";
 
 export default {
   name: "HistoryAndFavoritesModal",
   components: {
     HistoryList,
+    TabHeader,
   },
   emits: {
     onClose: null,
     onSelect: String,
+  },
+  data() {
+    return {
+      tabs: [
+        {
+          id: "f",
+          icon: "star_border",
+          label: "Favorites",
+        },
+        {
+          id: "h",
+          icon: "history",
+          label: "History",
+        },
+      ],
+      selectedTabId: "f",
+    };
   },
 };
 </script>
@@ -66,10 +93,11 @@ export default {
   position: fixed;
   top: 7rem;
   bottom: 0;
-  left: 1rem;
-  right: 1rem;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  background-color: #000000;
+  left: 0rem;
+  right: 0rem;
+}
+
+.modal-tabs {
+  margin-bottom: 1rem;
 }
 </style>

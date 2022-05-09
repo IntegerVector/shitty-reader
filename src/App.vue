@@ -31,6 +31,10 @@
   cursor: pointer;
 }
 
+.icon--smaller {
+  font-size: 1.75rem;
+}
+
 :root {
   font-size: 16px;
 }
@@ -94,5 +98,9 @@ input[type="search"],
 
 .text--dark {
   color: #000000;
+}
+
+.text--bold {
+  font-weight: 600;
 }
 </style>
