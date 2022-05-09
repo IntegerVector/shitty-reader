@@ -43,6 +43,9 @@ export default {
 .list-container {
   height: 100%;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
 }
 
 ul,
