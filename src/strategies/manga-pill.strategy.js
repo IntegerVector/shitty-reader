@@ -52,6 +52,14 @@ export class MangaPillStrategy {
     });
   }
 
+  getCovers(searchString) {
+    const bookId = searchString.match(/\d+/i)[0];
+
+    return ["jpeg", "jpg", "png"].map((type) => {
+      return this._getCoverUrl(bookId, type);
+    });
+  }
+
   _getFullCode(searchString) {
     const fullCodeMatch = searchString.match(/\d+\D\d+/);
     if (fullCodeMatch && fullCodeMatch.length) {
@@ -67,6 +75,10 @@ export class MangaPillStrategy {
 
   _getUrl(bookId, chapterId, number, imageType) {
     return `//cdn.readdetectiveconan.com/file/mangap/${bookId}/${chapterId}/${number}.${imageType}`;
+  }
+
+  _getCoverUrl(bookId, imageType) {
+    return `//cdn.readdetectiveconan.com/file/mangapill/i/${bookId}.${imageType}`;
   }
 
   _getImageType(searchString) {

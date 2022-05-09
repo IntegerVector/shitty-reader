@@ -1,6 +1,7 @@
 <template>
   <ul class="list-container">
     <li v-for="item in itemsList" :key="item">
+      <CoverPreview :searchString="item" />
       <span @click="$emit('onSelect', item)">
         {{ item }}
       </span>
@@ -12,10 +13,15 @@
 </template>
 
 <script>
+import CoverPreview from "@/components/CoverPreview.vue";
+
 import { history } from "@/services/history";
 
 export default {
   name: "HistoryList",
+  components: {
+    CoverPreview,
+  },
   emits: {
     onSelect: String,
   },
