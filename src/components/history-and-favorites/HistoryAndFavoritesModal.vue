@@ -12,14 +12,16 @@
           :tabs="tabs"
           @onSelect="selectedTabId = $event.id"
         />
-        <HistoryList
-          v-if="selectedTabId === 'h'"
-          @onSelect="$emit('onSelect', $event)"
-        />
-        <FavoritesList
-          v-if="selectedTabId === 'f'"
-          @onSelect="$emit('onSelect', $event)"
-        />
+        <dir class="modal-list">
+          <HistoryList
+            v-if="selectedTabId === 'h'"
+            @onSelect="$emit('onSelect', $event)"
+          />
+          <FavoritesList
+            v-if="selectedTabId === 'f'"
+            @onSelect="$emit('onSelect', $event)"
+          />
+        </dir>
       </div>
     </div>
   </div>
@@ -98,9 +100,20 @@ export default {
 .modal-content {
   position: fixed;
   top: 7rem;
-  bottom: 0;
+  bottom: 0rem;
   left: 0rem;
   right: 0rem;
+}
+
+.modal-list {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 10.5rem;
+  bottom: 0rem;
+  left: 0rem;
+  right: 0rem;
+  overflow-y: auto;
 }
 
 .modal-tabs {

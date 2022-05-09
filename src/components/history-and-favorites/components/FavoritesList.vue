@@ -48,7 +48,6 @@ export default {
 <style scoped>
 .list-container {
   height: 100%;
-  overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
@@ -62,9 +61,8 @@ li {
 }
 
 li {
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   max-width: 100%;
-  overflow-x: hidden;
   display: flex;
   justify-content: space-between;
   align-items: center;
