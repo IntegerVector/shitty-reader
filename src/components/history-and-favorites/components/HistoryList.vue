@@ -61,11 +61,6 @@ li {
   align-items: center;
   font-weight: bold;
   cursor: pointer;
-}
-
-li:hover {
   border-bottom: 1px solid #ffffff;
-  border-top: 1px solid #ffffff;
-  background-color: #1f1f1f;
 }
 </style>
