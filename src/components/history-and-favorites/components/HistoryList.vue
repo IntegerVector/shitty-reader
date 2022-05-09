@@ -5,9 +5,18 @@
       <span @click="$emit('onSelect', item)">
         {{ item }}
       </span>
-      <button class="material-icons text--light" @click="deleteItem(item)">
-        delete
-      </button>
+      <div>
+        <button
+          class="material-icons text--light"
+          :id="'icon-' + item"
+          @click="toggleFav(item)"
+        >
+          {{ fav.has(item) ? "star" : "star_border" }}
+        </button>
+        <button class="material-icons text--light" @click="deleteItem(item)">
+          delete
+        </button>
+      </div>
     </li>
   </ul>
 </template>
@@ -16,6 +25,7 @@
 import CoverPreview from "@/components/CoverPreview.vue";
 
 import { history } from "@/services/history";
+import { favorites } from "@/services/favorites";
 
 export default {
   name: "HistoryList",
@@ -28,12 +38,19 @@ export default {
   data() {
     return {
       itemsList: history.get(),
+      fav: favorites,
     };
   },
   methods: {
     deleteItem(item) {
       history.delete(item);
       this.itemsList = history.get();
+    },
+    toggleFav(item) {
+      const btn = document.getElementById("icon-" + item);
+      btn.textContent =
+        btn.textContent === "star_border" ? "star" : "star_border";
+      favorites.toggle(item);
     },
   },
 };
