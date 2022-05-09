@@ -6,6 +6,13 @@ export const favorites = {
   get() {
     return ls.getData() || [];
   },
+  toggle(item) {
+    if (this.has(item)) {
+      this.remove(item);
+    } else {
+      this.add(item);
+    }
+  },
   add(item) {
     const fav = this.get();
     const isExists = this.has(item);

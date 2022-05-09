@@ -12,6 +12,12 @@
         <button @click="search()">
           <span class="material-icons text--light"> download </span>
         </button>
+        <button @click="toggleFav()">
+          <span v-if="!isFav" class="material-icons text--light">
+            star_border
+          </span>
+          <span v-if="isFav" class="material-icons text--light"> star </span>
+        </button>
         <button @click="clear()">
           <span class="material-icons text--light"> clear </span>
         </button>
@@ -24,6 +30,7 @@
 <script>
 import { getStrategy } from "@/services/get-strategy-by-source";
 import { history } from "@/services/history";
+import { favorites } from "@/services/favorites";
 
 export default {
   name: "Search",
@@ -41,6 +48,7 @@ export default {
       handler(newValue, oldValue) {
         if (newValue !== oldValue) {
           this.text = this.searchString;
+          this.isFav = favorites.has(this.text);
           this.search();
         }
       },
@@ -50,10 +58,12 @@ export default {
     return {
       text: "",
       source: "MANGA_PILL",
+      isFav: false,
     };
   },
   mounted() {
     this.text = this.getHistory().pop() || "";
+    this.isFav = favorites.has(this.text);
 
     if (this.text) {
       this.search();
@@ -77,6 +87,10 @@ export default {
     },
     getHistory() {
       return history.get() || [];
+    },
+    toggleFav() {
+      favorites.toggle(this.text);
+      this.isFav = favorites.has(this.text);
     },
   },
 };
