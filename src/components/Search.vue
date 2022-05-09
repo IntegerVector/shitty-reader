@@ -12,11 +12,13 @@
         <button @click="search()">
           <span class="material-icons text--light"> download </span>
         </button>
-        <button @click="toggleFav()">
-          <span v-if="!isFav" class="material-icons text--light">
+        <button v-if="text" @click="toggleFav()">
+          <span v-if="!isFav" class="material-icons icon--smaller text--light">
             star_border
           </span>
-          <span v-if="isFav" class="material-icons text--light"> star </span>
+          <span v-if="isFav" class="material-icons icon--smaller text--light">
+            star
+          </span>
         </button>
         <button @click="clear()">
           <span class="material-icons text--light"> clear </span>
@@ -63,7 +65,7 @@ export default {
   },
   mounted() {
     this.text = this.getHistory().pop() || "";
-    this.isFav = favorites.has(this.text);
+    this.updateIsFav();
 
     if (this.text) {
       this.search();
@@ -79,10 +81,12 @@ export default {
       const data = await strategy.loadPages(`${this.text}`);
       this.text = data.text;
       history.push(data.text);
+      this.updateIsFav();
       this.$emit("onSearch", data.urls);
     },
     clear() {
       this.text = "";
+      this.isFav = false;
       this.$emit("onSearch", []);
     },
     getHistory() {
@@ -90,6 +94,9 @@ export default {
     },
     toggleFav() {
       favorites.toggle(this.text);
+      this.updateIsFav();
+    },
+    updateIsFav() {
       this.isFav = favorites.has(this.text);
     },
   },
@@ -119,7 +126,7 @@ export default {
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   gap: 0.25rem;
   height: 2.5rem;
 }
@@ -132,5 +139,9 @@ input[type="submit"] {
   visibility: hidden;
   height: 0;
   width: 0;
+}
+
+.icon--smaller {
+  font-size: 1.75rem;
 }
 </style>
