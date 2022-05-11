@@ -4,7 +4,7 @@
       <img
         class="cover-item"
         alt="No data"
-        :id="url"
+        :class="url"
         :src="url"
         @load="loaded(url)"
       />
@@ -34,8 +34,10 @@ export default {
   },
   methods: {
     loaded(url) {
-      const image = document.getElementById(url);
-      image.style.display = "block";
+      const images = [...document.getElementsByClassName(url)];
+      images.forEach((image) => {
+        image.style.display = "block";
+      });
     },
   },
 };
