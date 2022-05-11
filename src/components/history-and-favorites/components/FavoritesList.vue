@@ -49,8 +49,8 @@ export default {
 .list-container {
   height: 100%;
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 ul,
